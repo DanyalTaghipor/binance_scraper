@@ -6,7 +6,35 @@ from tqdm import tqdm
 
 
 class BinanceHistoricalDataScraper:
+    """
+    BinanceHistoricalDataScraper is a class that scrapes historical data of Binance USDT trading pairs.
 
+    Attributes:
+        symbols_url (str): URL to get the list of trading pairs on Binance.
+        symbols_list (list): List of USDT trading pairs to scrape data for.
+        params (dict): Dictionary of scraping parameters including timeframe and limit.
+        historical_data (DataFrame): Pandas DataFrame to store the scraped historical data.
+
+    Methods:
+        fetch(session, url):
+            Asynchronously fetches data from the specified URL using the provided session.
+
+        get_historical_data(session, symbol, pbar):
+            Asynchronously gets the historical data for a given symbol using the provided session and progress bar.
+
+        scrape():
+            Asynchronously scrapes historical data for all symbols in symbols_list and saves it to a CSV file.
+
+    Args:
+        tf (str): Timeframe for scraping the data. Allowed values are [1m, 3m, 5m, 15m, 30m, 1h, 2h, 4h, 8h, 1d].
+        limit (int): Limit number of candles for scraping the data. Allowed values are from 1 to 1000.
+
+    Raises:
+        None
+
+    Returns:
+        None
+    """
     def __init__(self, tf, limit):
         self.symbols_url = 'https://api.binance.com/api/v3/exchangeInfo'
         self.symbols_list = []
